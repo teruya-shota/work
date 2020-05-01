@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+     <% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+
+      <header class="navbar  navbar-inverse">
+        <div class="container">
+        <nav class="navbar-left">
+          <span>Bookers</span>
+        </nav>
+        </div>
+        <nav>
+        <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <li><%= link_to user_path(current_user.id), class: "my-bt" do%><i class="glyphicon glyphicon-home"></i>Home<% end %></li>
+             <li><%= link_to users_path, class: "my-bt" do%><i class="glyphicon glyphicon-user"></i>Users<% end %></li>
+             <li><%= link_to books_path, class: "my-bt" do%><i class="glyphicon glyphicon-book"></i>Books<% end %></li>
+              <li><%= link_to destroy_user_session_path, method: :delete, class: "my-bt" do%><i class="glyphicon glyphicon-log-in"></i>logout<% end %></li>
+
+            <% else %>
+             <li><%= link_to root_path, class: "my-bt" do%><i class="glyphicon glyphicon-home"></i>Home<% end %></li>
+            <li><%= link_to home_about_path, class: "my-bt" do%><i class="glyphicon glyphicon-link"></i>About<% end %></li>
+            <li><%= link_to new_user_registration_path, class: "my-bt" do%><i class="glyphicon glyphicon-edit"></i>sign up<% end %></li>
+            <li><%= link_to new_user_session_path, class: "my-bt" do%><i class="glyphicon glyphicon-log-in"></i>login<% end %></li>
+            <% end %>
+          </ul>
+        </nav>
+        </div>
+      </header>
+     <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <%= yield %>
+
+    <footer>
+        <div class="container">
+        <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
